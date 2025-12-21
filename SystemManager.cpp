@@ -209,7 +209,6 @@ void SystemManager::manageTimetable() {
         return;
     }
 
-    // current points to the node to modify
     Course &c = current->course;
 
     std::cout << "\nCurrent Timetable for " << code << ":\n";
@@ -309,7 +308,6 @@ void SystemManager::studentMenu(Student &s) {
                 std::string code;
                 std::cout << "Course Code: ";
                 std::cin >> code;
-                // Optional: check if course exists before registering
                 if (searchCourseByCode(code) == -1) {
                     std::cout << "Course does not exist!\n";
                 } else {
@@ -589,7 +587,6 @@ void SystemManager::saveCoursesToFile(const std::string &filename) {
     std::cout << "Changes saved to courses.txt successfully!\n";
 }
 
-// --- Sorting helper implementations ---
 
 static std::string toLowerStr(const std::string &s) {
     std::string out;
@@ -615,7 +612,6 @@ static bool compareCoursesField(const Course &a, const Course &b, const std::str
         va = toLowerStr(a.getCourseName());
         vb = toLowerStr(b.getCourseName());
     } else {
-        // fallback to code
         va = toLowerStr(a.getCourseCode());
         vb = toLowerStr(b.getCourseCode());
     }
@@ -641,7 +637,6 @@ void SystemManager::bubbleSortCourses(Course list[], int n, const std::string &f
     for (int i = 0; i < n - 1; ++i) {
         swapped = false;
         for (int j = 0; j < n - 1 - i; ++j) {
-            // if next should come before current, swap
             if (compareCoursesField(list[j + 1], list[j], field, ascending)) {
                 std::swap(list[j], list[j + 1]);
                 swapped = true;
